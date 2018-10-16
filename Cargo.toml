@@ -1,0 +1,6 @@
+[package]
+name = "minishell"
+version = "0.1.0"
+authors = ["Dustin Knopoff <dustinknopoff@gmail.com>"]
+
+[dependencies]
