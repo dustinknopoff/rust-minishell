@@ -56,9 +56,6 @@ fn main() {
         io::stdin().read_line(&mut input).unwrap();
         // println!("{:?}", input);
         let funcs = Funcs::new(tokenize(input));
-        if input.contains("|") {
-            funcs.piped();
-        }
         match funcs.args[0].as_str() {
             "cd" => funcs.cd(),
             "help" => funcs.help(),
