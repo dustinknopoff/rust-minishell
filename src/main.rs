@@ -2,7 +2,7 @@ use std::env::set_current_dir;
 use std::io::{self, Write};
 use std::path::Path;
 use std::process;
-use std::process::{Command, Stdio};
+use std::process::Command;
 
 #[derive(Debug)]
 struct Funcs {
@@ -11,11 +11,11 @@ struct Funcs {
 
 impl Funcs {
     fn new(args: Vec<String>) -> Self {
-        Funcs { args: args }
+        Funcs { args }
     }
 
     fn cd(&self) -> i32 {
-        if self.args.len() == 0 {
+        if self.args.is_empty() {
             panic!("No Arguments!")
         }
         let p = Path::new(&self.args[1]);
@@ -29,7 +29,7 @@ impl Funcs {
     }
 
     fn exit(&self) -> i32 {
-        process::exit(1);
+        process::exit(0);
     }
 
     fn other(&self) -> i32 {
@@ -42,7 +42,7 @@ impl Funcs {
     }
 }
 
-fn tokenize(input: String) -> Vec<String> {
+fn tokenize(input: &str) -> Vec<String> {
     let args: Vec<_> = input.split_whitespace().map(|x| x.to_string()).collect();
     args
 }
@@ -53,7 +53,7 @@ fn main() {
         io::stdout().flush().unwrap();
         let mut input = String::new();
         io::stdin().read_line(&mut input).unwrap();
-        let funcs = Funcs::new(tokenize(input));
+        let funcs = Funcs::new(tokenize(input.as_str()));
         match funcs.args[0].as_str() {
             "cd" => funcs.cd(),
             "help" => funcs.help(),
