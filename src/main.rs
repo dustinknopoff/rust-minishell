@@ -49,12 +49,10 @@ fn tokenize(input: String) -> Vec<String> {
 
 fn main() {
     loop {
-        print!("minishell> ");
+        print!("minishell>");
         io::stdout().flush().unwrap();
         let mut input = String::new();
-        // let mut funcs: Funcs;
         io::stdin().read_line(&mut input).unwrap();
-        // println!("{:?}", input);
         let funcs = Funcs::new(tokenize(input));
         match funcs.args[0].as_str() {
             "cd" => funcs.cd(),
